@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>信息学奥赛 - haoran的学习网站</title>
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 1200px;
+            width: 100%;
+            margin: 0 auto;
+            padding: 40px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from { opacity: 0; transform: translateY(20px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .back-link {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover { color: #764ba2; }
+
+        .title {
+            font-size: 48px;
+            font-weight: bold;
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle { font-size: 18px; color: #666; margin-bottom: 20px; }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .subject-card {
+            background: linear-gradient(145deg, #f6f8ff, #e9ecef);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border-color: #667eea;
+        }
+
+        .subject-card.coming-soon::after {
+            content: '即将上线';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            color: #fff;
+            font-size: 12px;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .subject-icon { font-size: 60px; margin-bottom: 20px; display: block; }
+        .subject-title { font-size: 24px; font-weight: bold; color: #333; margin-bottom: 8px; }
+        .subject-description { font-size: 14px; color: #666; line-height: 1.6; }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer-text { color: #999; font-size: 14px; }
+        .footer-link { color: #667eea; text-decoration: none; margin: 0 10px; }
+        .footer-link:hover { text-decoration: underline; }
+
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: rgba(0, 0, 0, 0.85);
+            color: #fff;
+            padding: 30px 50px;
+            border-radius: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            text-align: center;
+            line-height: 1.6;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .toast.show { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        .toast-emoji { font-size: 40px; display: block; margin-bottom: 10px; }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a class="back-link" href="index.html">
+                <span>🏠 返回主页</span>
+            </a>
+            <h1 class="title">信息学奥赛</h1>
+            <p class="subtitle">算法 · 数据结构 · 竞赛备考</p>
+        </div>
+
+        <div class="subjects-grid">
+            <div class="subject-card" data-target="oi-websites.html">
+                <span class="subject-icon">🌐</span>
+                <h2 class="subject-title">必备网站</h2>
+                <p class="subject-description">OI Wiki、洛谷、Codeforces、LeetCode 等学习与刷题平台汇总</p>
+            </div>
+
+            <div class="subject-card coming-soon" data-target="">
+                <span class="subject-icon">🧠</span>
+                <h2 class="subject-title">算法原理</h2>
+                <p class="subject-description">排序、搜索、动态规划、图论等核心算法的原理与实现</p>
+            </div>
+
+            <div class="subject-card coming-soon" data-target="">
+                <span class="subject-icon">📅</span>
+                <h2 class="subject-title">学习计划</h2>
+                <p class="subject-description">从入门到省选的系统化学习路线与时间规划</p>
+            </div>
+
+            <div class="subject-card coming-soon" data-target="">
+                <span class="subject-icon">⌨️</span>
+                <h2 class="subject-title">代码模板</h2>
+                <p class="subject-description">常用算法的 C++ 代码模板与快速参考手册</p>
+            </div>
+
+            <div class="subject-card coming-soon" data-target="">
+                <span class="subject-icon">🏗️</span>
+                <h2 class="subject-title">数据结构</h2>
+                <p class="subject-description">栈、队列、树、图、线段树等数据结构的详解与应用</p>
+            </div>
+
+            <div class="subject-card coming-soon" data-target="">
+                <span class="subject-icon">🏆</span>
+                <h2 class="subject-title">真题训练</h2>
+                <p class="subject-description">NOIP / CSP 历年真题解析与模拟赛经验分享</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p class="footer-text">&copy; 2025-2026 Haoran. All rights reserved. Developed with AI assistance.</p>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <span class="toast-emoji">🚧</span>
+        正在制作中，敬请期待
+    </div>
+
+    <script>
+        document.querySelectorAll('.subject-card').forEach(function(card) {
+            card.addEventListener('click', function() {
+                var target = this.getAttribute('data-target');
+                if (target) {
+                    window.location.href = target;
+                } else {
+                    showToast();
+                }
+            });
+        });
+
+        function showToast() {
+            var toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>

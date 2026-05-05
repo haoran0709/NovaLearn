@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>NovaLearn</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+        
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 1200px;
+            width: 100%;
+            padding: 40px;
+            animation: fadeIn 0.6s ease-out;
+        }
+        
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .title {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 50px;
+        }
+        
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+        
+        .subject-card {
+            background: linear-gradient(145deg, #f6f8ff, #e9ecef);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        }
+        
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border-color: #667eea;
+        }
+        
+        .subject-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            display: block;
+        }
+        
+        .subject-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+        
+        .subject-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+        
+        .math-icon { color: #e74c3c; }
+        .physics-icon { color: #3498db; }
+        .chemistry-icon { color: #2ecc71; }
+        
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+        }
+        
+        .footer-text {
+            color: #999;
+            font-size: 14px;
+        }
+        
+        .footer-link {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+        
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        .subject-card.coming-soon {
+            position: relative;
+        }
+
+        .subject-card.coming-soon::after {
+            content: '即将上线';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            color: #fff;
+            font-size: 12px;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: rgba(0, 0, 0, 0.85);
+            color: #fff;
+            padding: 30px 50px;
+            border-radius: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            text-align: center;
+            line-height: 1.6;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .toast-emoji {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1 class="title">NovaLearn</h1>
+            <p class="subtitle">探索知识的海洋，开启学习之旅</p>
+        </div>
+        
+        <div class="subjects-grid">
+            <div class="subject-card" onclick="location.href='math.html'">
+                <span class="subject-icon math-icon">📐</span>
+                <h2 class="subject-title">数学</h2>
+                <p class="subject-description">代数、几何、微积分等数学知识的探索与练习</p>
+            </div>
+            
+            <div class="subject-card" onclick="location.href='physics.html'">
+                <span class="subject-icon physics-icon">⚡</span>
+                <h2 class="subject-title">物理</h2>
+                <p class="subject-description">电学、力学、热学等物理实验模拟与学习</p>
+            </div>
+            
+            <div class="subject-card coming-soon">
+                <span class="subject-icon chemistry-icon">🧪</span>
+                <h2 class="subject-title">化学</h2>
+                <p class="subject-description">元素周期表、化学反应、化学实验等化学知识</p>
+            </div>
+
+            <div class="subject-card" onclick="location.href='olympiad.html'">
+                <span class="subject-icon" style="color:#9b59b6;">💻</span>
+                <h2 class="subject-title">信息学奥赛</h2>
+                <p class="subject-description">算法原理、必备网站、学习计划等竞赛备考资源</p>
+            </div>
+        </div>
+        
+        <div class="footer">
+            <p class="footer-text">&copy; 2025-2026 Haoran. All rights reserved. Developed with AI assistance.</p>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <span class="toast-emoji">🚧</span>
+        正在制作中，敬请期待
+    </div>
+
+    <script>
+        document.querySelectorAll('.subject-card.coming-soon').forEach(function(card) {
+            card.addEventListener('click', function(e) {
+                e.preventDefault();
+                showToast();
+            });
+        });
+
+        function showToast() {
+            var toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(function() {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
