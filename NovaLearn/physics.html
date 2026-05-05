@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>物理实验平台 - haoran的学习网站</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 20px;
+        }
+
+        .container {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 20px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 1200px;
+            width: 100%;
+            padding: 40px;
+            animation: fadeIn 0.6s ease-out;
+        }
+
+        @keyframes fadeIn {
+            from {
+                opacity: 0;
+                transform: translateY(20px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+            position: relative;
+        }
+
+        .back-link {
+            position: absolute;
+            left: 0;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #667eea;
+            text-decoration: none;
+            font-size: 16px;
+            transition: color 0.3s;
+        }
+
+        .back-link:hover {
+            color: #764ba2;
+        }
+
+        .title {
+            font-size: 48px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.1);
+            background: linear-gradient(45deg, #667eea, #764ba2);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+
+        .subtitle {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 20px;
+        }
+
+        .subjects-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 20px;
+            margin-bottom: 30px;
+        }
+
+        .subject-card {
+            background: linear-gradient(145deg, #f6f8ff, #e9ecef);
+            border-radius: 15px;
+            padding: 30px;
+            transition: all 0.3s ease;
+            cursor: pointer;
+            border: 2px solid transparent;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            position: relative;
+        }
+
+        .subject-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.2);
+            border-color: #667eea;
+        }
+
+        .subject-card.coming-soon::after {
+            content: '即将上线';
+            position: absolute;
+            top: 12px;
+            right: 12px;
+            background: linear-gradient(45deg, #f39c12, #e74c3c);
+            color: #fff;
+            font-size: 12px;
+            padding: 3px 10px;
+            border-radius: 10px;
+            font-weight: bold;
+        }
+
+        .subject-icon {
+            font-size: 60px;
+            margin-bottom: 20px;
+            display: block;
+        }
+
+        .subject-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .subject-description {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .circuit-icon { color: #f39c12; }
+        .newton-icon { color: #3498db; }
+        .light-icon { color: #e74c3c; }
+        .heat-icon { color: #e67e22; }
+        .sound-icon { color: #9b59b6; }
+        .magnetism-icon { color: #2ecc71; }
+
+        .footer {
+            text-align: center;
+            margin-top: 40px;
+            padding-top: 30px;
+            border-top: 1px solid #e0e0e0;
+        }
+
+        .footer-text {
+            color: #999;
+            font-size: 14px;
+        }
+
+        .footer-link {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 10px;
+        }
+
+        .footer-link:hover {
+            text-decoration: underline;
+        }
+
+        /* 提示框样式 */
+        .toast {
+            position: fixed;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%) scale(0.8);
+            background: rgba(0, 0, 0, 0.85);
+            color: #fff;
+            padding: 30px 50px;
+            border-radius: 15px;
+            font-size: 22px;
+            font-weight: bold;
+            z-index: 1000;
+            opacity: 0;
+            transition: all 0.3s ease;
+            pointer-events: none;
+            text-align: center;
+            line-height: 1.6;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4);
+        }
+
+        .toast.show {
+            opacity: 1;
+            transform: translate(-50%, -50%) scale(1);
+        }
+
+        .toast-emoji {
+            font-size: 40px;
+            display: block;
+            margin-bottom: 10px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <a class="back-link" href="index.html">
+                <span>🏠 返回主页</span>
+            </a>
+            <h1 class="title">物理实验平台</h1>
+            <p class="subtitle">动手探索物理世界的奥秘</p>
+        </div>
+
+        <div class="subjects-grid">
+            <div class="subject-card" data-target="circuit.html">
+                <span class="subject-icon circuit-icon">⚡</span>
+                <h2 class="subject-title">电路搭建</h2>
+                <p class="subject-description">自由搭建电路，模拟电流、电压、电阻等电学实验</p>
+            </div>
+
+            <div class="subject-card coming-soon" data-target="">
+                <span class="subject-icon newton-icon">🍎</span>
+                <h2 class="subject-title">探究牛顿第一定律</h2>
+                <p class="subject-description">模拟斜面实验，探索惯性定律的奥秘</p>
+            </div>
+
+            <div class="subject-card" data-target="light.html">
+                <span class="subject-icon light-icon">🔬</span>
+                <h2 class="subject-title">光的传播规律</h2>
+                <p class="subject-description">探索光的反射、折射、色散等光学现象</p>
+            </div>
+
+            <div class="subject-card coming-soon" data-target="">
+                <span class="subject-icon heat-icon">🌡️</span>
+                <h2 class="subject-title">物态变化实验</h2>
+                <p class="subject-description">模拟熔化、凝固、汽化、液化等热学实验</p>
+            </div>
+
+            <div class="subject-card coming-soon" data-target="">
+                <span class="subject-icon sound-icon">🔊</span>
+                <h2 class="subject-title">声音的特性</h2>
+                <p class="subject-description">探索声音的音调、响度、音色及其影响因素</p>
+            </div>
+
+            <div class="subject-card coming-soon" data-target="">
+                <span class="subject-icon magnetism-icon">🧲</span>
+                <h2 class="subject-title">电磁相互作用</h2>
+                <p class="subject-description">探索磁场、电磁感应、电磁铁等电磁学实验</p>
+            </div>
+        </div>
+
+        <div class="footer">
+            <p class="footer-text">&copy; 2025-2026 Haoran. All rights reserved. Developed with AI assistance.</p>
+        </div>
+    </div>
+
+    <div class="toast" id="toast">
+        <span class="toast-emoji">🚧</span>
+        正在制作中，敬请期待
+    </div>
+
+    <script>
+        document.querySelectorAll('.subject-card').forEach(card => {
+            card.addEventListener('click', function () {
+                var target = this.getAttribute('data-target');
+                if (target) {
+                    window.location.href = target;
+                } else {
+                    showToast();
+                }
+            });
+        });
+
+        function showToast() {
+            var toast = document.getElementById('toast');
+            toast.classList.add('show');
+            setTimeout(function () {
+                toast.classList.remove('show');
+            }, 2000);
+        }
+    </script>
+</body>
+</html>
